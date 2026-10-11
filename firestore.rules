@@ -1,0 +1,173 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Helper functions
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+    
+    function isSuperAdmin() {
+      return isAuthenticated() && request.auth.token.role == 'SUPER_ADMIN';
+    }
+    
+    function isAdmin() {
+      return isAuthenticated() && (request.auth.token.role == 'ADMIN' || request.auth.token.role == 'SUPER_ADMIN');
+    }
+    
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+
+    // USERS COLLECTION
+    match /users/{userId} {
+      allow read: if isOwner(userId) || isAdmin();
+      allow create: if isAuthenticated() && isOwner(userId) && request.resource.data.role in ['CUSTOMER', 'PROVIDER'];
+      allow update: if (isOwner(userId) && !request.resource.data.diff(resource.data).affectedKeys().hasAny(['role', 'status'])) || isSuperAdmin();
+      allow delete: if false;
+    }
+
+    // CUSTOMERS
+    match /customers/{customerId} {
+      allow read: if isOwner(customerId) || isAdmin();
+      allow create, update: if isOwner(customerId) || isAdmin();
+      allow delete: if isAdmin();
+    }
+
+    // PROVIDERS
+    match /providers/{providerId} {
+      allow read: if true; // Public directory reading
+      allow create: if isOwner(providerId);
+      allow update: if (isOwner(providerId) && !request.resource.data.diff(resource.data).affectedKeys().hasAny(['verificationStatus', 'ratingAvg', 'earningsSummary'])) || isAdmin();
+      allow delete: if false;
+    }
+
+    // PROVIDER APPLICATION / KYC
+    match /provider_applications/{providerId} {
+      allow read: if isOwner(providerId) || isAdmin();
+      allow create: if isOwner(providerId);
+      allow update: if (isOwner(providerId) && resource.data.status == 'REJECTED') || isAdmin();
+      allow delete: if false;
+    }
+
+    // SERVICE CATEGORIES (PUBLIC READ, ADMIN WRITE)
+    match /service_categories/{catId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // SERVICES (PUBLIC READ, ADMIN WRITE)
+    match /services/{serviceId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // PRICING RULES (AUTHENTICATED READ, SUPER ADMIN WRITE)
+    match /pricing_rules/{ruleId} {
+      allow read: if isAuthenticated();
+      allow write: if isSuperAdmin();
+    }
+
+    // ADDRESSES
+    match /addresses/{addressId} {
+      allow read: if isAuthenticated() && (resource.data.customerId == request.auth.uid || isAdmin());
+      allow create: if isAuthenticated() && request.resource.data.customerId == request.auth.uid;
+      allow update, delete: if isAuthenticated() && resource.data.customerId == request.auth.uid;
+    }
+
+    // BOOKINGS (CONTROLLED - NO DIRECT CLIENT OVERWRITE OF SENSITIVE FIELDS)
+    match /bookings/{bookingId} {
+      allow read: if isAuthenticated() && (
+        resource.data.customerId == request.auth.uid ||
+        resource.data.providerId == request.auth.uid ||
+        isAdmin()
+      );
+      // Direct client creates and updates must be executed via Cloud Functions
+      allow write: if false;
+    }
+
+    // REVIEWS
+    match /reviews/{reviewId} {
+      allow read: if true;
+      allow create: if isAuthenticated() && request.resource.data.customerId == request.auth.uid;
+      allow update, delete: if isAdmin();
+    }
+
+    // AUDIT LOGS (STRICTLY READ-ONLY FOR SUPER ADMIN, WRITES VIA ADMIN SDK ONLY)
+    match /audit_logs/{logId} {
+      allow read: if isSuperAdmin();
+      allow write: if false;
+    }
+
+    // NOTIFICATIONS (IN-APP USER ALERTS)
+    match /notifications/{notificationId} {
+      allow read: if isAuthenticated() && (resource.data.userId == request.auth.uid || isAdmin());
+      allow create: if false;
+      allow update: if isAuthenticated() &&
+        resource.data.userId == request.auth.uid &&
+        request.resource.data.diff(resource.data).affectedKeys().hasOnly(['isRead']) &&
+        request.resource.data.isRead is bool;
+      allow delete: if isAuthenticated() && (resource.data.userId == request.auth.uid || isAdmin());
+    }
+
+    // SMS LOGS (TELECOM AUDIT & DELIVERY TRACKING)
+    match /sms_logs/{logId} {
+      allow read: if isAdmin();
+      allow write: if false;
+    }
+
+    // PAYMENTS (AUDITED FINANCIAL TRANSACTIONS & GATEWAY LEDGER)
+    match /payments/{paymentId} {
+      allow read: if isAuthenticated() && (
+        resource.data.customerId == request.auth.uid ||
+        (resource.data.providerId != null && resource.data.providerId == request.auth.uid) ||
+        isAdmin()
+      );
+      // Completely disabled from client; server-side execution via Cloud Functions only
+      allow write: if false;
+    }
+
+    // PAYOUTS (PROVIDER EARNING DISBURSEMENTS & FINANCIAL SETTLEMENTS)
+    match /payouts/{payoutId} {
+      allow read: if isAuthenticated() && (
+        resource.data.providerId == request.auth.uid ||
+        isAdmin()
+      );
+      // Completely disabled from client; server-side execution via Cloud Functions only
+      allow write: if false;
+    }
+
+    // SYSTEM SETTINGS (GLOBAL PLATFORM CONFIGURATION & METADATA)
+    match /system_settings/{settingId} {
+      allow read: if true;
+      allow write: if isSuperAdmin();
+    }
+
+    // PROMO CODES (DISCOUNT CODES & VOUCHERS)
+    match /promo_codes/{codeId} {
+      allow read: if isAuthenticated();
+      allow write: if isAdmin();
+    }
+
+    // DISPUTES (BOOKING CONFLICTS & MEDIATION)
+    match /disputes/{disputeId} {
+      allow read: if isAuthenticated() && (
+        resource.data.customerId == request.auth.uid ||
+        resource.data.providerId == request.auth.uid ||
+        isAdmin()
+      );
+      allow create: if isAuthenticated() &&
+        request.resource.data.customerId == request.auth.uid &&
+        request.resource.data.status == 'OPEN';
+      allow update: if isAdmin();
+      allow delete: if false;
+    }
+
+    // RATE LIMITS (INTERNAL SECURITY LEDGER - STRICT SERVER-ONLY VIA ADMIN SDK)
+    match /rate_limits/{key} {
+      allow read, write: if false;
+    }
+  }
+}
+
+

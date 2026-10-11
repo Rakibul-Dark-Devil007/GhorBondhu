@@ -1,0 +1,263 @@
+{
+  "categories": [
+    {
+      "categoryId": "cleaning",
+      "nameBn": "বাসা ও অফিস ক্লিনিং",
+      "nameEn": "House & Office Cleaning",
+      "descriptionBn": "পেশাদার পরিচ্ছন্নতাকর্মী দ্বারা বাসা, ড্রয়িং, ডাইনিং ও বেডরুম পরিষ্কার।",
+      "descriptionEn": "Professional cleaning for homes, living rooms, and bedrooms.",
+      "iconUrl": "/icons/cleaning.svg",
+      "displayOrder": 1,
+      "isActive": true
+    },
+    {
+      "categoryId": "kitchen",
+      "nameBn": "কিচেন ও থালাবাসন সেবা",
+      "nameEn": "Kitchen & Dishwashing",
+      "descriptionBn": "তেলচিটচিটে চুলা, কিচেন ক্যাবিনেট ও থালাবাসন জীবাণুমুক্তকরণ।",
+      "descriptionEn": "Hygienic cleaning for stoves, kitchen cabinets, and dishwashing.",
+      "iconUrl": "/icons/kitchen.svg",
+      "displayOrder": 2,
+      "isActive": true
+    },
+    {
+      "categoryId": "laundry",
+      "nameBn": "লন্ড্রি ও কাপড় ইস্ত্রি",
+      "nameEn": "Laundry & Ironing",
+      "descriptionBn": "পরিষ্কার কাপড় ধোয়া, শুকানো ও নিঁখুত ইস্ত্রি সেবা।",
+      "descriptionEn": "Washing, drying, and crisp ironing services for your clothes.",
+      "iconUrl": "/icons/laundry.svg",
+      "displayOrder": 3,
+      "isActive": true
+    },
+    {
+      "categoryId": "assistance",
+      "nameBn": "দৈনন্দিন গৃহস্থালী সহায়তা",
+      "nameEn": "Household & Care Assistance",
+      "descriptionBn": "রান্নায় সাহায্য, প্রবীণদের সঙ্গ ও যত্ন এবং বাসা গুছানোর কাজ।",
+      "descriptionEn": "Cooking help, elderly assistance, and home organization.",
+      "iconUrl": "/icons/assistance.svg",
+      "displayOrder": 4,
+      "isActive": true
+    }
+  ],
+  "services": [
+    {
+      "serviceId": "house-deep-cleaning",
+      "categoryId": "cleaning",
+      "nameBn": "বাসা সম্পূর্ণ ডিপ ক্লিনিং",
+      "nameEn": "House Deep Cleaning",
+      "descriptionBn": "পুরো বাসা ভ্যাকুয়াম, ফ্লোর মোপিং, ঝুল পরিষ্কার ও ফার্নিচার মোছা।",
+      "descriptionEn": "Full house vacuuming, mopping, cobweb removal, and furniture dusting.",
+      "pricingRuleId": "rule_house_deep_cleaning",
+      "materialsProvidedBy": "CUSTOMER",
+      "estimatedMinDurationMinutes": 60,
+      "availableDurationsMinutes": [60, 90, 120, 150, 180, 240],
+      "imageUrl": "/images/services/house-cleaning.jpg",
+      "isActive": true,
+      "displayOrder": 1
+    },
+    {
+      "serviceId": "bathroom-cleaning",
+      "categoryId": "cleaning",
+      "nameBn": "বাথরুম স্যানিটাইজিং ও ওয়াশ",
+      "nameEn": "Bathroom Sanitization & Cleaning",
+      "descriptionBn": "টাইলস স্কেল রিমুভাল, বেসিন, কমোড ও ফিটিংস জীবাণুমুক্তকরণ।",
+      "descriptionEn": "Tiles scale removal, commode, basin, and fixtures sanitization.",
+      "pricingRuleId": "rule_bathroom_cleaning",
+      "materialsProvidedBy": "CUSTOMER",
+      "estimatedMinDurationMinutes": 30,
+      "availableDurationsMinutes": [30, 60, 90, 120],
+      "imageUrl": "/images/services/bathroom-cleaning.jpg",
+      "isActive": true,
+      "displayOrder": 2
+    },
+    {
+      "serviceId": "kitchen-dishwashing",
+      "categoryId": "kitchen",
+      "nameBn": "কিচেন ডিপ ও থালাবাসন ক্লিনিং",
+      "nameEn": "Kitchen Deep & Dishwashing",
+      "descriptionBn": "সিঙ্ক, কিচেন স্ল্যাব, চুলা পরিষ্কার এবং থালাবাসন ধোয়া।",
+      "descriptionEn": "Sink, kitchen slab, gas stove cleaning and dishwashing.",
+      "pricingRuleId": "rule_kitchen_dishwashing",
+      "materialsProvidedBy": "CUSTOMER",
+      "estimatedMinDurationMinutes": 30,
+      "availableDurationsMinutes": [30, 60, 90, 120],
+      "imageUrl": "/images/services/kitchen-cleaning.jpg",
+      "isActive": true,
+      "displayOrder": 3
+    },
+    {
+      "serviceId": "laundry-ironing",
+      "categoryId": "laundry",
+      "nameBn": "লন্ড্রি ও কাপড় নিখুঁত ইস্ত্রি",
+      "nameEn": "Laundry & Crisp Ironing",
+      "descriptionBn": "ওয়াশিং বা হাতে কাপড় ধোয়া ও জামা-কাপড় সতর্কতার সাথে ইস্ত্রি।",
+      "descriptionEn": "Machine/hand washing clothes and delicate wrinkle-free ironing.",
+      "pricingRuleId": "rule_laundry_ironing",
+      "materialsProvidedBy": "CUSTOMER",
+      "estimatedMinDurationMinutes": 30,
+      "availableDurationsMinutes": [30, 60, 90, 120],
+      "imageUrl": "/images/services/laundry.jpg",
+      "isActive": true,
+      "displayOrder": 4
+    },
+    {
+      "serviceId": "cooking-assistance",
+      "categoryId": "assistance",
+      "nameBn": "দৈনন্দিন রান্নায় সাহায্য",
+      "nameEn": "Daily Cooking Assistance",
+      "descriptionBn": "শাকসবজি কাটা, মসলা প্রস্তুতকরণ এবং সুস্বাদু বাঙালি খাবার রান্না।",
+      "descriptionEn": "Cutting vegetables, prepping spices, and authentic home-style cooking.",
+      "pricingRuleId": "rule_cooking_assistance",
+      "materialsProvidedBy": "CUSTOMER",
+      "estimatedMinDurationMinutes": 60,
+      "availableDurationsMinutes": [60, 90, 120, 180],
+      "imageUrl": "/images/services/cooking.jpg",
+      "isActive": true,
+      "displayOrder": 5
+    },
+    {
+      "serviceId": "elderly-assistance",
+      "categoryId": "assistance",
+      "nameBn": "প্রবীণ ও অসুস্থদের যত্ন",
+      "nameEn": "Elderly & Healthcare Help",
+      "descriptionBn": "বাসায় প্রবীণ পরিবারের সদস্যদের ওষুধ দেওয়া ও সময় কাটানোর বিশ্বস্ত সাহায্য।",
+      "descriptionEn": "Compassionate companion care, medication reminders, and general help.",
+      "pricingRuleId": "rule_elderly_assistance",
+      "materialsProvidedBy": "CUSTOMER",
+      "estimatedMinDurationMinutes": 60,
+      "availableDurationsMinutes": [60, 120, 180, 240],
+      "imageUrl": "/images/services/elderly.jpg",
+      "isActive": true,
+      "displayOrder": 6
+    }
+  ],
+  "pricingRules": [
+    {
+      "ruleId": "rule_house_deep_cleaning",
+      "serviceId": "house-deep-cleaning",
+      "versionTag": "2026-v1",
+      "basePriceBDT": 600,
+      "baseDurationMinutes": 60,
+      "incrementDurationMinutes": 30,
+      "incrementPercentage": 0.30,
+      "platformCommissionPercent": 20,
+      "emergencySurchargeBDT": 200,
+      "peakHourMultiplier": 1.20,
+      "weekendMultiplier": 1.10,
+      "isActive": true
+    },
+    {
+      "ruleId": "rule_bathroom_cleaning",
+      "serviceId": "bathroom-cleaning",
+      "versionTag": "2026-v1",
+      "basePriceBDT": 400,
+      "baseDurationMinutes": 30,
+      "incrementDurationMinutes": 30,
+      "incrementPercentage": 0.30,
+      "platformCommissionPercent": 20,
+      "emergencySurchargeBDT": 150,
+      "peakHourMultiplier": 1.20,
+      "weekendMultiplier": 1.10,
+      "isActive": true
+    },
+    {
+      "ruleId": "rule_kitchen_dishwashing",
+      "serviceId": "kitchen-dishwashing",
+      "versionTag": "2026-v1",
+      "basePriceBDT": 350,
+      "baseDurationMinutes": 30,
+      "incrementDurationMinutes": 30,
+      "incrementPercentage": 0.30,
+      "platformCommissionPercent": 20,
+      "emergencySurchargeBDT": 150,
+      "peakHourMultiplier": 1.20,
+      "weekendMultiplier": 1.10,
+      "isActive": true
+    },
+    {
+      "ruleId": "rule_laundry_ironing",
+      "serviceId": "laundry-ironing",
+      "versionTag": "2026-v1",
+      "basePriceBDT": 300,
+      "baseDurationMinutes": 30,
+      "incrementDurationMinutes": 30,
+      "incrementPercentage": 0.25,
+      "platformCommissionPercent": 20,
+      "emergencySurchargeBDT": 100,
+      "peakHourMultiplier": 1.15,
+      "weekendMultiplier": 1.10,
+      "isActive": true
+    },
+    {
+      "ruleId": "rule_cooking_assistance",
+      "serviceId": "cooking-assistance",
+      "versionTag": "2026-v1",
+      "basePriceBDT": 450,
+      "baseDurationMinutes": 60,
+      "incrementDurationMinutes": 30,
+      "incrementPercentage": 0.25,
+      "platformCommissionPercent": 20,
+      "emergencySurchargeBDT": 150,
+      "peakHourMultiplier": 1.20,
+      "weekendMultiplier": 1.15,
+      "isActive": true
+    },
+    {
+      "ruleId": "rule_elderly_assistance",
+      "serviceId": "elderly-assistance",
+      "versionTag": "2026-v1",
+      "basePriceBDT": 500,
+      "baseDurationMinutes": 60,
+      "incrementDurationMinutes": 30,
+      "incrementPercentage": 0.25,
+      "platformCommissionPercent": 15,
+      "emergencySurchargeBDT": 150,
+      "peakHourMultiplier": 1.15,
+      "weekendMultiplier": 1.10,
+      "isActive": true
+    }
+  ],
+  "rolesPermissions": [
+    {
+      "roleName": "SUPER_ADMIN",
+      "description": "সর্বোচ্চ ক্ষমতা সম্পন্ন প্ল্যাটফর্ম ওনার",
+      "permissions": {
+        "canVerifyProviders": true,
+        "canManageCatalog": true,
+        "canConfigurePricing": true,
+        "canOverrideBookings": true,
+        "canHandleDisputes": true,
+        "canProcessPayouts": true,
+        "canManageAdmins": true,
+        "canViewAuditLogs": true
+      }
+    },
+    {
+      "roleName": "ADMIN_OPERATIONS",
+      "description": "অপারেশনাল স্টাফ - প্রোভাইডার যাচাই ও বুকিং পরিচালনা",
+      "permissions": {
+        "canVerifyProviders": true,
+        "canManageCatalog": true,
+        "canConfigurePricing": false,
+        "canOverrideBookings": true,
+        "canHandleDisputes": true,
+        "canProcessPayouts": false,
+        "canManageAdmins": false,
+        "canViewAuditLogs": false
+      }
+    }
+  ],
+  "systemSettings": {
+    "platformName": "GhorBondhu (ঘরবন্ধু)",
+    "supportPhone": "+8801700000000",
+    "supportEmail": "support@ghorbondhu.com",
+    "operatingCity": "Dhaka",
+    "defaultCommissionPercent": 20,
+    "minBookingDurationMinutes": 30,
+    "maxBookingDurationMinutes": 360,
+    "autoAssignWindowMinutes": 15,
+    "maintenanceMode": false
+  }
+}

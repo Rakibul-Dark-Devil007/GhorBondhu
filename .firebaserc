@@ -1,0 +1,10 @@
+{
+  "projects": {
+    "default": "ghorbondhu-dev",
+    "development": "ghorbondhu-dev",
+    "staging": "ghorbondhu-staging",
+    "production": "ghorbondhu-prod"
+  },
+  "targets": {},
+  "etags": {}
+}
